@@ -1,11 +1,14 @@
 ---
 title: React Avatar（头像）组件
 components: Avatar, AvatarGroup, Badge
+githubLabel: 'component: Avatar'
 ---
 
 # Avatar 头像组件
 
 <p class="description">在整个 material design 中，无论是在表格中还是到对话框菜单中，都可以找到使用头像的身影。</p>
+
+{{"component": "modules/components/ComponentLinkHeader.js"}}
 
 ## 图片头像
 
@@ -19,6 +22,10 @@ components: Avatar, AvatarGroup, Badge
 
 {{"demo": "pages/components/avatars/LetterAvatars.js"}}
 
+你可以为头像添加不同的背景颜色 下面的例子演示了如何通过人物的姓名来展示头像
+
+{{"demo": "pages/components/avatars/BackgroundLetterAvatars.js"}}
+
 ## 尺寸
 
 你可以通过改变 `height` 以及 `width` 这两个 CSS 属性来改变头像组件的尺寸。
@@ -31,7 +38,7 @@ components: Avatar, AvatarGroup, Badge
 
 {{"demo": "pages/components/avatars/IconAvatars.js"}}
 
-## 变种
+## 其他的方式
 
 如果你需要矩形或圆角的头像组件，请使用 `variant`属性。
 
@@ -49,9 +56,15 @@ components: Avatar, AvatarGroup, Badge
 
 ## 分组
 
-`AvatarGroup` 通过堆栈的方式渲染其子元素。
+`AvatarGroup` renders its children as a stack. Use the `max` prop to limit the number of avatars.
 
 {{"demo": "pages/components/avatars/GroupAvatars.js"}}
+
+### Total avatars
+
+If you need to control the total number of avatars not shown, you can use the `total` prop.
+
+{{"demo": "pages/components/avatars/TotalAvatars.js"}}
 
 ## 带有徽章的组件
 

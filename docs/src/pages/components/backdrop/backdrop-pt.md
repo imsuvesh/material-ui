@@ -1,6 +1,7 @@
 ---
 title: Componente React para Pano de Fundo
-components: Backdrop
+components: Backdrop, BackdropUnstyled
+githubLabel: 'component: Backdrop'
 ---
 
 # Backdrop
@@ -9,4 +10,16 @@ components: Backdrop
 
 O backdrop sinaliza para o usuário uma mudança de estado dentro do aplicativo e pode ser usado para criar progressos, diálogos e muito mais. Em seu formato mais simples, o componente backdrop irá adicionar uma camada escurecida sobre seu aplicativo.
 
+{{"component": "modules/components/ComponentLinkHeader.js"}}
+
+## Exemplo
+
 {{"demo": "pages/components/backdrop/SimpleBackdrop.js"}}
+
+## Unstyled
+
+The backdrop also comes with the Base package. É ideal para fazer personalizações pesadas e diminuir o tamanho do pacote.
+
+```js
+import BackdropUnstyled from '@mui/base/BackdropUnstyled';
+```

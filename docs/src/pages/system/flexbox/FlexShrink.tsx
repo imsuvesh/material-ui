@@ -1,19 +1,37 @@
-import React from 'react';
-import Box from '@material-ui/core/Box';
+import * as React from 'react';
+import Box, { BoxProps } from '@mui/material/Box';
+
+function Item(props: BoxProps) {
+  const { sx, ...other } = props;
+  return (
+    <Box
+      sx={{
+        p: 1,
+        m: 1,
+        bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#101010' : 'grey.100'),
+        color: (theme) => (theme.palette.mode === 'dark' ? 'grey.300' : 'grey.800'),
+        border: '1px solid',
+        borderColor: (theme) =>
+          theme.palette.mode === 'dark' ? 'grey.800' : 'grey.300',
+        borderRadius: 2,
+        fontSize: '0.875rem',
+        fontWeight: '700',
+        ...sx,
+      }}
+      {...other}
+    />
+  );
+}
 
 export default function FlexShrink() {
   return (
     <div style={{ width: '100%' }}>
-      <Box display="flex" p={1} bgcolor="background.paper">
-        <Box p={1} width="100%" bgcolor="grey.300">
-          Item 1
-        </Box>
-        <Box p={1} flexShrink={1} bgcolor="grey.300">
-          Item 2
-        </Box>
-        <Box p={1} flexShrink={0} bgcolor="grey.300">
-          Item 3
-        </Box>
+      <Box
+        sx={{ display: 'flex', p: 1, bgcolor: 'background.paper', borderRadius: 1 }}
+      >
+        <Item sx={{ width: '100%' }}>Item 1</Item>
+        <Item sx={{ flexShrink: 1 }}>Item 2</Item>
+        <Item sx={{ flexShrink: 0 }}>Item 3</Item>
       </Box>
     </div>
   );

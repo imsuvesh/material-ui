@@ -1,6 +1,7 @@
 ---
 title: React Popper component
-components: Popper
+components: Popper, PopperUnstyled
+githubLabel: 'component: Popper'
 ---
 
 # Popper
@@ -9,18 +10,20 @@ components: Popper
 
 Some important features of the `Popper` component:
 
-- 🕷 Popper relies on the 3rd party library ([Popper.js](https://github.com/FezVrasta/popper.js)) for perfect positioning.
+- 🕷 Popper relies on the 3rd party library ([Popper.js](https://github.com/popperjs/popper-core)) for perfect positioning.
 - 💄 It's an alternative API to react-popper. It aims for simplicity.
-- 📦 [10 kB gzipped](/size-snapshot) ([7 kB](https://bundlephobia.com/result?p=popper.js) from Popper.js).
+- 📦 [8 kB gzipped](/size-snapshot).
 - The children is [`Portal`](/components/portal/) to the body of the document to avoid rendering problems.
-You can disable this behavior with `disablePortal`.
+  You can disable this behavior with `disablePortal`.
 - The scroll isn't blocked like with the [`Popover`](/components/popover/) component.
-The placement of the popper updates with the available area in the viewport.
+  The placement of the popper updates with the available area in the viewport.
 - Clicking away does not hide the `Popper` component.
   If you need this behavior, you can use [`ClickAwayListener`](/components/click-away-listener/) - see the example in the [menu documentation section](/components/menus/#menulist-composition).
 - The `anchorEl` is passed as the reference object to create a new `Popper.js` instance.
 
-## Simple Popper
+{{"component": "modules/components/ComponentLinkHeader.js", "design": false}}
+
+## Basic popper
 
 {{"demo": "pages/components/popper/SimplePopper.js"}}
 
@@ -32,32 +35,32 @@ This component should respect the following conditions:
 - Be a direct child descendent of the popper.
 - Call the `onEnter` callback prop when the enter transition starts.
 - Call the `onExited` callback prop when the exit transition is completed.
-These two callbacks allow the popper to unmount the child content when closed and fully transitioned.
+  These two callbacks allow the popper to unmount the child content when closed and fully transitioned.
 
 Popper has built-in support for [react-transition-group](https://github.com/reactjs/react-transition-group).
 
 {{"demo": "pages/components/popper/TransitionsPopper.js"}}
 
-Alternatively, you can use [react-spring](https://github.com/react-spring/react-spring).
+Alternatively, you can use [react-spring](https://github.com/pmndrs/react-spring).
 
 {{"demo": "pages/components/popper/SpringPopper.js"}}
 
-## Positioned Popper
+## Positioned popper
 
-{{"demo": "pages/components/popper/PositionedPopper.js", "bg": true}}
+{{"demo": "pages/components/popper/PositionedPopper.js"}}
 
 ## Scroll playground
 
 {{"demo": "pages/components/popper/ScrollPlayground.js", "hideToolbar": true, "bg": true}}
 
-## Faked reference object
+## Virtual element
 
-The `anchorEl` property can be a reference to a fake DOM element.
-You just need to create an object shaped like the [`ReferenceObject`](https://github.com/FezVrasta/popper.js/blob/0642ce0ddeffe3c7c033a412d4d60ce7ec8193c3/packages/popper/index.d.ts#L118-L123).
+The value of the `anchorEl` prop can be a reference to a fake DOM element.
+You need to create an object shaped like the [`VirtualElement`](https://popper.js.org/docs/v2/virtual-elements/).
 
 Highlight part of the text to see the popper:
 
-{{"demo": "pages/components/popper/FakedReferencePopper.js"}}
+{{"demo": "pages/components/popper/VirtualElementPopper.js"}}
 
 ## Complementary projects
 
@@ -69,3 +72,14 @@ There is a 3rd party package [`material-ui-popup-state`](https://github.com/jcor
 state for you in most cases.
 
 {{"demo": "pages/components/popper/PopperPopupState.js"}}
+
+## Unstyled
+
+The @mui/base package contain an unstyled version of Popper - PopperUnstyled.
+It does not have a dependency on @mui/material.
+The only difference between Popper and PopperUnstyled is the support for theming.
+Popper can read the `direction` field from the current theme, while PopperUnstyled accepts the `direction` prop instead.
+
+```js
+import Popper from '@mui/base/PopperUnstyled';
+```

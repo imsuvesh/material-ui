@@ -1,26 +1,19 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Popper from '@material-ui/core/Popper';
-import Fade from '@material-ui/core/Fade';
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    border: '1px solid',
-    padding: theme.spacing(1),
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Popper from '@mui/material/Popper';
+import Fade from '@mui/material/Fade';
 
 export default function TransitionsPopper() {
-  const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
-    setAnchorEl(anchorEl ? null : event.currentTarget);
+    setAnchorEl(event.currentTarget);
+    setOpen((previousOpen) => !previousOpen);
   };
 
-  const open = Boolean(anchorEl);
-  const id = open ? 'transitions-popper' : undefined;
+  const canBeOpen = open && Boolean(anchorEl);
+  const id = canBeOpen ? 'transition-popper' : undefined;
 
   return (
     <div>
@@ -30,7 +23,9 @@ export default function TransitionsPopper() {
       <Popper id={id} open={open} anchorEl={anchorEl} transition>
         {({ TransitionProps }) => (
           <Fade {...TransitionProps} timeout={350}>
-            <div className={classes.paper}>The content of the Popper.</div>
+            <Box sx={{ border: 1, p: 1, bgcolor: 'background.paper' }}>
+              The content of the Popper.
+            </Box>
           </Fade>
         )}
       </Popper>

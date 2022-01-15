@@ -1,11 +1,14 @@
 ---
 title: Componente React Paginação
 components: Pagination, PaginationItem
+githubLabel: 'component: Pagination'
 ---
 
 # Paginação
 
 <p class="description">O componente de paginação permite ao usuário selecionar uma página específica a partir de um intervalo de páginas.</p>
+
+{{"component": "modules/components/ComponentLinkHeader.js"}}
 
 ## Paginação básica
 
@@ -33,6 +36,12 @@ Você pode habilitar opcionalmente  os botões de primeira página e de última 
 
 Você pode especificar quantos dígitos exibir a qualquer lado da página atual com a propriedade `siblingRange`, e adjacente ao número da página inicial e final com a propriedade `boundaryRange`.
 
+{{"demo": "pages/components/pagination/CustomIcons.js"}}
+
+## Intervalos de paginação
+
+Você pode especificar quantos dígitos exibir a qualquer lado da página atual com a propriedade `siblingRange`, e adjacente ao número da página inicial e final com a propriedade `boundaryRange`.
+
 {{"demo": "pages/components/pagination/PaginationRanges.js"}}
 
 ## Paginação controlada
@@ -45,10 +54,10 @@ Você pode especificar quantos dígitos exibir a qualquer lado da página atual 
 
 ## `usePagination`
 
-Para casos avançados de uso de customização, nós expomos um hook sem dependência, `usePagination()`. Ele aceita quase as mesmas opções que o componente de paginação, menos todas as propriedades relacionadas à renderização de JSX. O componente de paginação usa este hook internamente.
+For advanced customization use cases, a headless `usePagination()` hook is exposed. Ele aceita quase as mesmas opções que o componente de paginação, menos todas as propriedades relacionadas à renderização de JSX. Ele aceita quase as mesmas opções que o componente de paginação, menos todas as propriedades relacionadas à renderização de JSX.
 
 ```jsx
-import { usePagination } from '@material-ui/lab/Pagination';
+import { usePagination } from '@material-ui/core/Pagination';
 ```
 
 {{"demo": "pages/components/pagination/UsePagination.js"}}
@@ -61,9 +70,11 @@ Para a paginação de um conjunto grande de dados tabulares, você deve usar o c
 
 {{"demo": "pages/components/pagination/TablePagination.js"}}
 
+> ⚠️ Observe que a propriedade `Pagination` da página começa em 1 para corresponder ao requisito de incluir o valor na URL, enquanto a propriedade `TablePagination` da página começa em 0 para corresponder ao requisito de zero-based array do JavaScript arrays, que tem com renderização muitos dados tabulares.
+
 Você pode aprender mais sobre este caso de uso na [seção de tabela](/components/tables/#custom-pagination-options) da documentação.
 
-## Acessibilidade
+## Accessibility
 
 ### ARIA
 

@@ -1,11 +1,14 @@
 ---
 title: React Pagination（分页）组件
 components: Pagination, PaginationItem
+githubLabel: 'component: Pagination'
 ---
 
-# 分页组件 Pagination 
+# Pagination 分页
 
 <p class="description">使用分页组件，用户可以从一系列页面中选择某个特定的页面。</p>
+
+{{"component": "modules/components/ComponentLinkHeader.js"}}
 
 ## 基础分页
 
@@ -33,6 +36,12 @@ components: Pagination, PaginationItem
 
 你可以使用 `siblingRange` 属性来指定当前页面两侧显示的数字多少，并使用`boundaryRange`属性来调整在起始和结束页码旁边显示的位数。
 
+{{"demo": "pages/components/pagination/CustomIcons.js"}}
+
+## 分页范围
+
+你可以使用 `siblingRange` 属性来指定当前页面两侧显示的数字多少，并使用`boundaryRange`属性来调整在起始和结束页码旁边显示的位数。
+
 {{"demo": "pages/components/pagination/PaginationRanges.js"}}
 
 ## 可控制的分页
@@ -45,10 +54,10 @@ components: Pagination, PaginationItem
 
 ## `usePagination`
 
-对于高级自定义用例，我们暴露了一个 headless 的 `usePagination()` hook。 它支持的选项与分页组件大致相同，但不包括与 JSX 渲染有关的所有属性。 分页组件内部也使用此 hook。
+For advanced customization use cases, a headless `usePagination()` hook is exposed. 它支持的选项与分页组件大致相同，但不包括与 JSX 渲染有关的所有属性。 它支持的选项与分页组件大致相同，但不包括与 JSX 渲染有关的所有属性。 The Pagination component is built on this hook.
 
 ```jsx
-import { usePagination } from '@material-ui/lab/Pagination';
+import { usePagination } from '@material-ui/core/Pagination';
 ```
 
 {{"demo": "pages/components/pagination/UsePagination.js"}}
@@ -61,9 +70,11 @@ import { usePagination } from '@material-ui/lab/Pagination';
 
 {{"demo": "pages/components/pagination/TablePagination.js"}}
 
+> ⚠️注意，`Pagination` 页面的属性从 1 开始，以满足在 URL 中包含当前页面参数值的要求，而 `TablePagination` 页面的属性则从 0 开始，以满足渲染大量表格数据时基于零开始的 JavaScript 数组的要求。
+
 您可以在文档的 [表格部分](/components/tables/#custom-pagination-options) 中了解更多关于此用例的信息。
 
-## 无障碍设计
+## Accessibility
 
 ### ARIA
 

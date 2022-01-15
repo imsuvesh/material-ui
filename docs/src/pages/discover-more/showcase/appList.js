@@ -13,13 +13,23 @@
  */
 const appList = [
   {
+    title: 'd-cide',
+    description:
+      'A progressive Web App to make rational decisions in workshops. ' +
+      'It uses MUI with a neumorphic custom theme.',
+    image: 'dcide.jpg',
+    link: 'https://d-cide.me/',
+    source: 'https://github.com/cjoecker/d-cide',
+    dateAdded: '2020-07-01',
+  },
+  {
     title: 'QuintoAndar',
     description:
       'QuintoAndar is a company that uses technology and ' +
       'design to simplify the rental of residential real estate.',
     image: 'quintoandar.png',
     link: 'https://www.quintoandar.com.br/',
-    similarWebVisits: 6000,
+    similarWebVisits: 8500,
     dateAdded: '2019-05-08',
   },
   {
@@ -41,18 +51,6 @@ const appList = [
     link: 'https://openclassrooms.com/en/',
     similarWebVisits: 6000,
     dateAdded: '2018-01-34',
-  },
-  {
-    title: 'Leroy Merlin',
-    description:
-      'Per i vostri progetti di bricolage, giardinaggio e miglioramento della casa, ' +
-      'Leroy Merlin propone una grande scelta di marche al prezzo migliore. ' +
-      'Tanti prodotti per tutta la casa: bagno, cucina, giardino, riscaldamento, elettricità, ' +
-      'idraulica… Ritira in negozio o ricevi comodamente a casa. 🇮🇹',
-    image: 'leroymerlin.jpg',
-    link: 'https://www.leroymerlin.it/',
-    similarWebVisits: 5700,
-    dateAdded: '2019-01-01',
   },
   {
     title: 'Codementor',
@@ -80,18 +78,8 @@ const appList = [
       'on gear, apparel, tickets, travel and more.',
     image: 'govx.jpg',
     link: 'https://www.govx.com/',
-    similarWebVisits: 1200,
+    similarWebVisits: 2000,
     dateAdded: '2018-01-31',
-  },
-  {
-    title: 'SFR Presse',
-    description:
-      'SFR Presse provides the best access to french newspapers, ' +
-      'magazines and real time streams, personalized for you. 🇫🇷',
-    image: 'sfrpresse.jpg',
-    link: 'https://sfrpresse.sfr.fr/',
-    similarWebVisits: 800,
-    dateAdded: '2018-01-25',
   },
   {
     title: 'AospExtended Download center',
@@ -100,7 +88,7 @@ const appList = [
       'for supported devices for different android versions.',
     image: 'aexdownloadcenter.jpg',
     link: 'https://downloads.aospextended.com/',
-    similarWebVisits: 730,
+    similarWebVisits: 200,
     dateAdded: '2018-01-28',
   },
   {
@@ -137,12 +125,13 @@ const appList = [
     description: 'NEO blockchain explorer and wallet.',
     image: 'neotracker.jpg',
     link: 'https://neotracker.io/',
-    similarWebVisits: 30,
+    similarWebVisits: 60,
     dateAdded: '2019-01-01',
   },
   {
     title: 'EQ3',
-    description: 'Modern Furniture & Accessories, designed in Canada, for everyday living.',
+    description:
+      'Modern Furniture & Accessories, designed in Canada, for everyday living.',
     image: 'eq3.jpg',
     link: 'https://www.eq3.com/ca/en/',
     similarWebVisits: 256,
@@ -153,20 +142,10 @@ const appList = [
     description:
       'The #1 rated mobile software to run your home service business. ' +
       'Schedule, dispatch, GPS track employees, invoice, accept credit cards and get booked ' +
-      'online. The marketing website is also built with Material-UI: https://www.housecallpro.com/',
+      'online. The marketing website is also built with MUI: https://www.housecallpro.com/',
     image: 'housecall.jpg',
     link: 'https://pro.housecall.io/pro/log_in',
-    similarWebVisits: 750,
-    dateAdded: '2019-01-01',
-  },
-  {
-    title: 'BitCambio',
-    description:
-      'A BitCambio oferece a facilidade de comprar e vender a moeda virtual bitcoin ' +
-      'de forma direta e segura no Brasil. 🇧🇷',
-    image: 'bitcambio.jpg',
-    link: 'https://bitcambio.com.br/',
-    similarWebVisits: 50,
+    similarWebVisits: 1800,
     dateAdded: '2019-01-01',
   },
   {
@@ -196,9 +175,9 @@ const appList = [
       'EOSToolkit is the premier free, open source interface for managing EOS ' +
       'accounts. Create, transfer, stake, vote and more with Scatter!',
     image: 'eostoolkit.jpg',
-    link: 'https://www.eostoolkit.io/',
+    link: 'https://eostoolkit.io/',
     source: 'https://github.com/eostoolkit/eostoolkit',
-    stars: 76,
+    stars: 91,
     dateAdded: '2019-01-01',
   },
   {
@@ -222,14 +201,6 @@ const appList = [
     dateAdded: '2018-01-34',
   },
   {
-    title: 'Numerai',
-    description: ' Earn cryptocurrency in weekly data science competitions.',
-    image: 'numerai.jpg',
-    link: 'https://numer.ai/homepage',
-    similarWebVisits: 65,
-    dateAdded: '2019-01-01',
-  },
-  {
     title: 'LocalMonero',
     description:
       'A safe and easy-to-use person-to-person platform to allow anyone ' +
@@ -240,31 +211,17 @@ const appList = [
   },
   {
     title: 'LessWrong',
-    description: 'LessWrong is a community blog devoted to the art of human rationality.',
+    description:
+      'LessWrong is a community blog devoted to the art of human rationality.',
     image: 'lesswrong.jpg',
     link: 'https://www.lesswrong.com/',
-    similarWebVisits: 774,
+    similarWebVisits: 1000,
     dateAdded: '2018-01-38',
-  },
-  {
-    title: 'Fizix',
-    description: 'Coaching sportif à domicile. 🇫🇷',
-    image: 'fizix.jpg',
-    link: 'https://www.fizix.io/',
-    dateAdded: '2019-01-01',
-  },
-  {
-    title: 'Venuemob',
-    description:
-      'A platform for individuals and businesses to find and book the perfect venue for any event.',
-    image: 'venuemob.jpg',
-    link: 'https://venuemob.com.au/',
-    dateAdded: '2018-01-02',
   },
   {
     title: 'ODIGEO Connect',
     description:
-      'Connect your hotel, B&B and apartment with Europe’s #1 flight OTA ' +
+      "Connect your hotel, B&B and apartment with Europe's #1 flight OTA " +
       'and distribute it to millions of travellers.',
     image: 'odigeo.jpg',
     link: 'https://www.odigeoconnect.com/',
@@ -274,9 +231,10 @@ const appList = [
     title: 'comet',
     description:
       'Comet lets you track code, experiments, and results on ML projects. ' +
-      'It’s fast, simple, and free for open source projects.',
+      "It's fast, simple, and free for open source projects.",
     image: 'comet.jpg',
     link: 'https://www.comet.ml/',
+    similarWebVisits: 180,
     dateAdded: '2019-01-01',
   },
   {
@@ -291,7 +249,7 @@ const appList = [
   {
     title: 'Oneplanetcrowd',
     description:
-      'Oneplanetcrowd is Europe’s leading sustainable crowdfunding platform for People & Planet.',
+      "Oneplanetcrowd is Europe's leading sustainable crowdfunding platform for People & Planet.",
     image: 'oneplanetcrowd.jpg',
     link: 'https://www.oneplanetcrowd.com/en',
     dateAdded: '2019-01-01',
@@ -317,17 +275,17 @@ const appList = [
     link: 'https://marmelab.com/react-admin-demo/',
     source: 'https://github.com/marmelab/react-admin',
     dateAdded: '2018-01-21',
-    stars: 10751,
+    stars: 18500,
   },
   {
     title: 'Builder Book',
     description:
       'Books to learn how to build full-stack, production-ready JavaScript web applications from scratch. ' +
-      'Learn React, Material-UI, Next, Express, Mongoose, MongoDB, third party APIs, and more.',
+      'Learn React, MUI, Next, Express, Mongoose, MongoDB, third party APIs, and more.',
     image: 'builderbook.jpg',
     link: 'https://builderbook.org/',
-    source: 'https://github.com/builderbook/builderbook',
-    stars: 1837,
+    source: 'https://github.com/async-labs/builderbook',
+    stars: 3000,
     dateAdded: '2018-01-05',
   },
   {
@@ -347,23 +305,6 @@ const appList = [
     dateAdded: '2019-01-01',
   },
   {
-    title: 'Cryptoverview: A friendly Dashboard for your cryptocurrency portfolio',
-    description:
-      "Cryptoverview is a responsive webapp that displays a user's Bittrex portfolio, " +
-      'trending currencies and market caps. It provides some fancy charts, ' +
-      'news related to cryptocurrencies, and more. (demo:demo)',
-    image: 'cryptoverview.jpg',
-    link: 'https://cryptoverview.com/',
-    dateAdded: '2018-01-09',
-  },
-  {
-    title: 'TuDiscovery',
-    description: 'Discovery Channel Latin America. 🇪🇸',
-    image: 'tudiscovery.jpg',
-    link: 'https://www.tudiscovery.com/',
-    dateAdded: '2019-01-01',
-  },
-  {
     title: 'Iceberg Finder',
     description:
       'Whether spotting them from outer space, or standing on our coastline, ' +
@@ -373,34 +314,12 @@ const appList = [
     dateAdded: '2019-01-01',
   },
   {
-    title: 'Rare Bits',
-    description: 'Rare Bits is a marketplace where users can buy, sell and discover crypto assets.',
-    image: 'rarebits.jpg',
-    link: 'https://rarebits.io/',
-    dateAdded: '2019-01-01',
-  },
-  {
     title: 'Roast',
-    description: 'Roast.io makes web hosting HTML and JS single-page apps fast, secure, and easy.',
+    description:
+      'Roast.io makes web hosting HTML and JS single-page apps fast, secure, and easy.',
     image: 'roast.jpg',
     link: 'https://www.roast.io/',
     dateAdded: '2019-01-01',
-  },
-  {
-    title: 'Melbourne Mint',
-    description:
-      'The Melbourne Mint has been synonymous with precious metals and currency ' +
-      'for over 100 years.',
-    image: 'melbournemint.jpg',
-    link: 'https://melbournemint.com.au/',
-    dateAdded: '2019-01-01',
-  },
-  {
-    title: 'Pilcro',
-    description: 'A free brand management software for the Google Suite.',
-    image: 'pilcro.jpg',
-    link: 'https://www.pilcro.com/',
-    dateAdded: '2018-01-17',
   },
   {
     title: 'Rung - Exceptionality Management',
@@ -413,17 +332,10 @@ const appList = [
   {
     title: 'MetaFact',
     description:
-      'Metafact is a place to verify knowledge via the world’s top experts. ' +
-      'It’s a platform to ask questions, learn the facts and share the truth.',
+      "Metafact is a place to verify knowledge via the world's top experts. " +
+      "It's a platform to ask questions, learn the facts and share the truth.",
     image: 'metafact.jpg',
     link: 'https://metafact.io/',
-    dateAdded: '2019-01-01',
-  },
-  {
-    title: 'Arkopharma',
-    description: 'Arkopharma Laboritories customer loyalty site. 🇫🇷',
-    image: 'arkoclub.jpg',
-    link: 'https://www.arkoclub.com/',
     dateAdded: '2019-01-01',
   },
   {
@@ -447,39 +359,16 @@ const appList = [
       'Modular audio production suite with multi-track audio mixing, audio effects, ' +
       'parameter automation, MIDI editing, synthesis, cloud production, and more.',
     image: 'audionodes.jpg',
-    link: 'https://audionodes.com/',
+    link: 'https://www.audionodes.com/',
     dateAdded: '2018-01-07',
   },
   {
     title: 'SlidesUp',
-    description: 'SlidesUp is a platform to help conference organizers plan their events.',
+    description:
+      'SlidesUp is a platform to help conference organizers plan their events.',
     image: 'slidesup.jpg',
     link: 'https://slidesup.com/',
     dateAdded: '2018-01-03',
-  },
-  {
-    title: 'Hokan',
-    description:
-      'Customer management and contract management we service for the insurance industry. 🇯🇵',
-    image: 'hkn.jpg',
-    link: 'https://hkn.jp/',
-    dateAdded: '2019-01-01',
-  },
-  {
-    title: 'One Shot Move',
-    description: 'An LA based moving company.',
-    image: 'oneshotmove.jpg',
-    link: 'https://www.oneshotmove.com/',
-    dateAdded: '2019-01-01',
-  },
-  {
-    title: 'Magic Mondayz',
-    description:
-      'A company that focuses on providing an honest and efficient recruitment service, ' +
-      'the human way.',
-    image: 'magicmondayz.jpg',
-    link: 'https://magicmondayz.com/',
-    dateAdded: '2019-01-01',
   },
   {
     title: 'Typekev',
@@ -508,25 +397,8 @@ const appList = [
       'coworking spaces. Meet, work and gain a sense of community.',
     image: 'dropdesk.jpg',
     link: 'https://drop-desk.com/',
+    similarWebVisits: 50,
     dateAdded: '2019-01-01',
-  },
-  {
-    title: 'Swimmy',
-    description: 'An open source forum PWA. 🇯🇵 (Github docs are in English)',
-    image: 'swimmy.jpg',
-    link: 'https://swimmy.io/',
-    source: 'https://github.com/swimmy/swimmy.io',
-    stars: 8,
-    dateAdded: '2018-01-27',
-  },
-  {
-    title: 'Planalyze',
-    description:
-      'Planalyze is a real-time daily planning & task tracking tool that keeps teams connected ' +
-      "& ahead of each day's workload.",
-    image: 'planalyze.jpg',
-    link: 'https://www.planalyze.io/',
-    dateAdded: '2018-01-10',
   },
   {
     title: 'npm registry browser',
@@ -554,7 +426,7 @@ const appList = [
     title: 'Tree',
     description:
       'An open source top 100 documentaries (personal opinion) app ' +
-      'with React Hooks and Material-UI.',
+      'with React Hooks and MUI.',
     link: 'https://tree.valleyease.me/',
     image: 'tree.jpg',
     source: 'https://github.com/ValleyZw/tree',
@@ -570,7 +442,7 @@ const appList = [
     link: 'https://mqtt-explorer.com/',
     source: 'https://github.com/thomasnordquist/MQTT-Explorer',
     image: 'mqtt-explorer.png',
-    stars: 510,
+    stars: 1600,
     dateAdded: '2019-03-25',
   },
   {
@@ -579,9 +451,9 @@ const appList = [
       'TagSpaces is an offline, open source, file manager.' +
       'It helps organizing your files and folders with tags and colors.',
     image: 'tagspaces.jpg',
-    link: 'https://www.tagspaces.org/',
+    link: 'https://www.tagspaces.org/demo/',
     source: 'https://github.com/tagspaces/tagspaces',
-    stars: 1874,
+    stars: 2500,
     dateAdded: '2019-11-01',
   },
   {
@@ -592,21 +464,22 @@ const appList = [
     dateAdded: '2020-01-08',
   },
   {
-    title: 'TradeNBA',
-    description: 'NBA trade machine and social analysis tools for the basketball community.',
+    title: 'FANSPO',
+    description:
+      'NBA trade machine and social analysis tools for the basketball community.',
     image: 'tradenba.jpg',
-    link: 'https://tradenba.com/',
-    similarWebVisits: 160,
+    link: 'https://fanspo.com/',
+    similarWebVisits: 417,
     dateAdded: '2020-01-20',
   },
   {
     title: 'CinemaPlus',
-    description: 'Cinema Plus is an online Movie Ticket Booking web app with MERN Stack.',
+    description:
+      'Cinema Plus is an online Movie Ticket Booking web app with MERN Stack.',
     image: 'cinemaplus.jpg',
     link: 'https://elcinema.herokuapp.com/',
-    similarWebVisits: 100,
     source: 'https://github.com/georgesimos/cinema-plus',
-    stars: 4,
+    stars: 173,
     dateAdded: '2020-01-31',
   },
   {
@@ -626,18 +499,25 @@ const appList = [
       'Backstage is an open platform by Spotify for building developer portals.',
     image: 'backstage.jpg',
     link: 'https://backstage.io',
-    source: 'https://github.com/spotify/backstage',
-    stars: 7400,
+    source: 'https://github.com/backstage/backstage',
+    stars: 14300,
     dateAdded: '2020-08-31',
   },
   {
-    title: 'LightyearVPN',
-    description:
-      'LightyearVPN is a simple to use, fast and secure VPN software.',
-    image: 'lightyearvpn.jpg',
-    link: 'https://lightyearvpn.com',
-    similarWebVisits: 534,
-    dateAdded: '2020-09-11',
+    title: 'buybags',
+    description: 'buybags is a fashion shopping aggregator in Germany.',
+    image: 'buybags.jpg',
+    link: 'https://www.buybags.de/',
+    dateAdded: '2020-10-08',
+  },
+  {
+    title: 'react-admin CRM demo',
+    description: 'A full-featured Customer Relationship Management app',
+    image: 'atomiccrm.jpg',
+    link: 'https://marmelab.com/react-admin-crm/',
+    source: 'https://github.com/marmelab/react-admin/tree/master/examples/crm',
+    stars: 18500,
+    dateAdded: '2021-05-06',
   },
 ];
 

@@ -4,20 +4,20 @@
 
 Se mesmo assim você não encontrar o que você está procurando, você pode consultar a nossa [página de suporte](/getting-started/support/).
 
-## Material-UI é incrível. Como posso apoiar o projeto?
+## MUI is awesome. Como posso apoiar o projeto?
 
 Existem muitas maneiras de apoiar o Material-UI:
 
 - **Espalhe a palavra**. Evangelize Material-UI [vinculando o material-ui.com](https://material-ui.com/) no seu site, todo backlink conta. Siga-nos no [Twitter](https://twitter.com/MaterialUI), curta e retuíte as notícias importantes. Ou apenas fale sobre nós com os seus amigos.
 - **Dê-nos sua opinião**. Conte-nos o que estamos fazendo bem ou onde podemos melhorar. Por favor vote (👍) nos issues do GitHub que você está mais interessado em ver resolvidos.
-- **Ajude novos usuários**. Você pode responder a perguntas no [StackOverflow](https://stackoverflow.com/questions/tagged/material-ui).
-- **Faça as alterações acontecerem**. 
+- **Ajude novos usuários**. You can answer questions on [StackOverflow](https://stackoverflow.com/questions/tagged/mui).
+- **Faça as alterações acontecerem**.
   - Edite a documentação. Cada página da versão em inglês tem um link "EDIT THIS PAGE" no canto superior direito.
   - Reporte erros ou recursos faltantes [criando uma issue](https://github.com/mui-org/material-ui/issues/new).
   - Revise e comente em [pull requests](https://github.com/mui-org/material-ui/pulls) e [issues](https://github.com/mui-org/material-ui/issues) existentes.
-  - Ajude a [traduzir](https://translate.material-ui.com) a documentação.
-  - [Aprimore nossa documentação](https://github.com/mui-org/material-ui/tree/master/docs), corrija bugs, ou adicione recursos [enviando um pull request](https://github.com/mui-org/material-ui/pulls).
-- **Apoie-nos financeiramente no [OpenCollective](https://opencollective.com/material-ui)**. Se você usa Material-UI em um projeto comercial e gostaria de apoiar seu desenvolvimento contínuo tornando-se um Patrocinador, ou em um projeto freelancer ou hobby e gostaria de se tornar um Apoiador, você pode se tornar através do OpenCollective. Todos os fundos doados são geridos de forma transparente e os Patrocinadores recebem reconhecimento no README e na página inicial do Material-UI.
+  - Ajude a [traduzir](https://translate.mui.com) a documentação.
+  - [Improve our documentation](https://github.com/mui-org/material-ui/tree/HEAD/docs), fix bugs, or add features by [submitting a pull request](https://github.com/mui-org/material-ui/pulls).
+- **Support us financially on [OpenCollective](https://opencollective.com/mui)**. Se você usa Material-UI em um projeto comercial e gostaria de apoiar seu desenvolvimento contínuo tornando-se um Patrocinador, ou em um projeto freelancer ou hobby e gostaria de se tornar um Apoiador, você pode se tornar através do OpenCollective. Todos os fundos doados são geridos de forma transparente e os Patrocinadores recebem reconhecimento no README e na página inicial do Material-UI.
 
 ## Por que meus componentes não estão renderizando corretamente em compilações de produção?
 
@@ -37,7 +37,7 @@ No geral, é simples livrar-se desse problema encapsulando cada aplicação Mate
 
 ## Por que os elementos posicionados como fixos se movem quando um modal é aberto?
 
-A rolagem é bloqueada assim que um modal é aberto. Isto impede a interação com o segundo plano, pois o modal deve ser o único conteúdo interativo. No entanto, removendo a barra de rolagem pode fazer com que seus **elementos fixos posicionados** se movam. Nesta situação, você pode aplicar um nome de classe global `.mui-fixed ` para informar ao Material-UI para manipular esses elementos.
+A rolagem é bloqueada assim que um modal é aberto. Isto impede a interação com o segundo plano, pois o modal deve ser o único conteúdo interativo. No entanto, removendo a barra de rolagem pode fazer com que seus **elementos fixos posicionados** se movam. Nesta situação, você pode aplicar um nome de classe global `.mui-fixed` para informar ao Material-UI para manipular esses elementos.
 
 ## Como posso desativar o efeito cascata globalmente?
 
@@ -47,12 +47,13 @@ O efeito cascata é exclusivamente proveniente do componente `BaseButton`. Você
 import { createTheme } from '@material-ui/core';
 
 const theme = createTheme({
-  props: {
-    // Nome do componente ⚛️
+  components: {
+    // Name of the component ⚛️
     MuiButtonBase: {
-      // As propriedades para aplicar
-      disableRipple: true, // Sem efeito cascata, em toda aplicação 💣!
-    },
+      defaultProps: {
+        // The props to apply
+        disableRipple: true, // No more ripple, on the whole application 💣!
+      },
   },
 });
 ```
@@ -66,7 +67,7 @@ import { createTheme } from '@material-ui/core';
 
 const theme = createTheme({
   transitions: {
-    // Então temos `transition: none;` em todo lugar
+    // So we have `transition: none;` everywhere
     create: () => 'none',
   },
 });
@@ -80,11 +81,10 @@ Você pode ir além, desabilitando todas as transições e efeitos de animaçõe
 import { createTheme } from '@material-ui/core';
 
 const theme = createTheme({
-  overrides: {
-    // Nome do componente ⚛️
+  components: {
+    // Name of the component ⚛️
     MuiCssBaseline: {
-      // Nome da regra
-      '@global': {
+      styleOverrides: {
         '*, *::before, *::after': {
           transition: 'none !important',
           animation: 'none !important',
@@ -110,7 +110,7 @@ Não, não é obrigatório. Mas essa dependência vem embutida, portanto, não s
 
 No entanto, talvez você esteja adicionando os componentes Material-UI para uma aplicação que já usa outra solução de estilos, ou, já esta familiarizado com uma API diferente e não quer aprender uma nova? Nesse caso, dirija-se à seção de [interoperabilidade da biblioteca de estilos](/guides/interoperability/), onde mostramos como é simples reestilizar os componentes do Material-UI com bibliotecas de estilos alternativas.
 
-## Quando devo usar o estilo em linha vs CSS?
+## When should I use inline-style vs. CSS?
 
 Como regra geral, use apenas o estilo em linha para propriedades de estilo dinâmicas. A alternativa de uso com CSS oferece mais vantagens, em:
 
@@ -121,7 +121,7 @@ Como regra geral, use apenas o estilo em linha para propriedades de estilo dinâ
 
 ## Como usar react-router?
 
-Detalhamos a [integração com bibliotecas de roteamento de terceiros](/guides/composition/#routing-libraries) como react-router, Gatsby ou Next.js em nosso guia.
+Detalhamos a [integração com bibliotecas de roteamento de terceiros](/guides/routing/) como react-router, Gatsby ou Next.js em nosso guia.
 
 ## Como posso acessar o elemento DOM?
 
@@ -178,7 +178,7 @@ Se você estiver usando o webpack, você pode mudar a maneira como ele irá reso
 
 ### Uso com Lerna
 
-Uma possível correção para que o @material-ui/styles seja executado em um monorepo Lerna através de pacotes é fazer [hoist](https://github.com/lerna/lerna/blob/master/doc/hoist.md) das dependências compartilhadas para a raiz do seu arquivo monorepo. Tente executar a opção de auto inicialização com o parâmetro --hoist.
+One possible fix to get @mui/styles to run in a Lerna monorepo across packages is to [hoist](https://github.com/lerna/lerna/blob/HEAD/doc/hoist.md) shared dependencies to the root of your monorepo file. Tente executar a opção de auto inicialização com o parâmetro --hoist.
 
 ```sh
 lerna bootstrap --hoist
@@ -218,7 +218,7 @@ Se você tiver várias aplicações em execução em uma página, considere o us
       app2: "./src/app.2.js",
     },
     plugins: [
-+     new webpack.optimize.CommonsChunkPlugin({
++     new webpack.optimize. CommonsChunkPlugin({
 +       name: "vendor",
 +       minChunks: Infinity,
 +     }),
@@ -228,7 +228,9 @@ Se você tiver várias aplicações em execução em uma página, considere o us
 
 ## Minha aplicação não é renderizada corretamente no servidor
 
-Se isso não funcionar, em 99% dos casos é um problema de configuração. Uma propriedade ausente, uma ordem de chamada errada ou um componente ausente – a renderização do lado do servidor é rigorosa sobre configuração, e a melhor maneira de descobrir o que há de errado é comparar seu projeto com uma configuração já em funcionamento. Confira as [implementações de referência](/guides/server-rendering/#reference-implementations), pouco a pouco.
+Se isso não funcionar, em 99% dos casos é um problema de configuração. Uma propriedade ausente, uma ordem de chamada errada ou um componente ausente – a renderização do lado do servidor é rigorosa sobre configuração, e a melhor maneira de descobrir o que há de errado é comparar seu projeto com uma configuração já em funcionamento.
+
+A melhor maneira de descobrir o que há de errado é comparar seu projeto com uma **configuração já em funcionamento**. Confira as [implementações de referência](/guides/server-rendering/#reference-implementations), pouco a pouco.
 
 ### O CSS funciona apenas no primeiro carregamento, em seguida, para de funcionar
 
@@ -238,7 +240,7 @@ O CSS é gerado apenas no primeiro carregamento da página. Em seguida, o CSS n�
 
 A solução de estilo depende de um cache, o *sheets manager*, para injetar apenas o CSS uma vez por tipo de componente (se você usar dois botões, você só precisa do CSS do botão uma vez). Você precisa criar **uma nova instância de `sheets` para cada requisição**.
 
-*exemplo de correção:*
+exemplo de correção:
 
 ```diff
 -// Crie uma instância de sheets.
@@ -252,29 +254,8 @@ function handleRender(req, res) {
   //…
 
   // Renderize o componente para uma string.
-  const html = ReactDOMServer.renderToString(
-```
 
-### React incompatibilidade de nome de classes na hidratação (React Hydrate)
-
-Há uma incompatibilidade de nome de classe entre o cliente e o servidor. Pode funcionar para a primeira requisição. Outro sintoma é que o estilo muda entre o carregamento inicial da página e o download dos scripts do cliente.
-
-#### Ação a tomar
-
-O valor de nomes de classe depende da lógica empregada pelo [gerador de nome de classe](/styles/advanced/#class-names). A página inteira precisa ser renderizada com **um único gerador**. Este gerador precisa se comportar de forma idêntica no servidor e no cliente. Por exemplo:
-
-- Você precisa fornecer um novo gerador de nome de classe para cada requisição. Mas você não deve compartilhar um `createGenerateClassName()` entre diferentes requisições:
-
-*exemplo de correção:*
-
-```diff
-- // Crie um novo gerador de nome de classe.
--const generateClassName = createGenerateClassName();
-
-function handleRender(req, res) {
-
-+ // Crie um novo gerador de nome de classe.
-+ const generateClassName = createGenerateClassName();
+  + const sheets = new ServerStyleSheets();
 
   //…
 
@@ -282,21 +263,46 @@ function handleRender(req, res) {
   const html = ReactDOMServer.renderToString(
 ```
 
-- Você precisa verificar se seu cliente e servidor estão executando **exatamente a mesma versão** do Material-UI. É possível que uma incompatibilidade de versões menores possa causar problemas de estilo. Para verificar números de versão, execute `npm list @material-ui/core` no ambiente em que você cria sua aplicação e também em seu ambiente de implementação.
-  
-    Você também pode garantir a mesma versão em diferentes ambientes, definindo uma versão específica do MUI nas dependências do seu package.json.
+### React incompatibilidade de nome de classes na hidratação (React Hydrate)
 
-*exemplo de correção (package.json):*
+> Warning: Prop className did not match.
 
-```diff
+Há uma incompatibilidade de nome de classe entre o cliente e o servidor. Pode funcionar para a primeira requisição. Outro sintoma é que o estilo muda entre o carregamento inicial da página e o download dos scripts do cliente.
+
+#### Ação a tomar
+
+O valor de nomes de classe depende da lógica empregada pelo [gerador de nome de classe](/styles/advanced/#class-names). O valor de nomes de classe depende da lógica empregada pelo [gerador de nome de classe](/styles/advanced/#class-names). Este gerador precisa se comportar de forma idêntica no servidor e no cliente. For instance:
+
+- Você precisa fornecer um novo gerador de nome de classe para cada requisição. Mas você não deve compartilhar um `createGenerateClassName()` entre diferentes requisições:
+
+  exemplo de correção:
+
+  ```diff
+  - // Crie um novo gerador de nome de classe.
+  -// Crie uma instância de sheets.
+  -const generateClassName = createGenerateClassName();
+
+function handleRender(req, res) {
+
++ // Cria um novo gerador de nome de classe.
+
+    // Renderize o componente para uma string.
+    const html = ReactDOMServer.renderToString(
+  ```
+
+- Você precisa verificar se seu cliente e servidor estão executando o **exatamente a mesma versão** do Material-UI. É possível que uma incompatibilidade de versões menores possa causar problemas de estilo. Para verificar números de versão, execute `npm list @material-ui/core` no ambiente em que você cria sua aplicação e também em seu ambiente de implementação.
+
+  Você também pode garantir a mesma versão em diferentes ambientes, definindo uma versão específica do MUI nas dependências do seu package.json.
+
+  _exemplo de correção (package.json):_
+
+  ```diff
+    "dependencies": {
+    ...
   "dependencies": {
     ...
-
--   "@material-ui/core": "^4.0.0",
-+   "@material-ui/core": "4.0.0",
-    ...
-  },
-```
+    },
+  ```
 
 - Você precisa ter certeza de que o servidor e o cliente compartilhem o mesmo valor de `process.env.NODE_ENV`.
 
@@ -347,7 +353,10 @@ Com esta simples heurística `Portal` pode renderizar novamente depois de montad
 ```jsx
 function App() {
   const [container, setContainer] = React.useState(null);
-  const handleRef = React.useCallback(instance => setContainer(instance), [setContainer])
+  const handleRef = React.useCallback(
+    (instance) => setContainer(instance),
+    [setContainer],
+  );
 
   return (
     <div className="App">
@@ -371,9 +380,11 @@ Em vez de escrever:
 
 return (
   <div
-    className={`MuiButton-root ${disabled ? 'Mui-disabled' : ''} ${selected ? 'Mui-selected' : ''}`}
-  />
-);
+    className={`MuiButton-root ${disabled ? // let disabled = false, selected = true;
+
+return (
+  <div
+    className={`MuiButton-root ${disabled ? 'Mui-disabled' : ''} ${selected ?
 ```
 
 você pode fazer:
@@ -390,3 +401,7 @@ return (
   />
 );
 ```
+
+## I cannot use components as selectors in the styled() utility. What should I do?
+
+If you are getting the error: `TypeError: Cannot convert a Symbol value to a string`, take a look at the [styled()](/system/styled/#how-to-use-components-selector-api) docs page for instructions on how you can fix this.

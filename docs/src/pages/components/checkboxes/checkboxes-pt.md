@@ -1,6 +1,9 @@
 ---
 title: Componente React para Caixa de seleção
 components: Checkbox, FormControl, FormGroup, FormLabel, FormControlLabel
+materialDesign: 'https://material.io/components/selection-controls#checkboxes'
+githubLabel: 'component: Checkbox'
+waiAria: 'https://www.w3.org/TR/wai-aria-practices/#checkbox'
 ---
 
 # Caixa de seleção
@@ -11,19 +14,49 @@ components: Checkbox, FormControl, FormGroup, FormLabel, FormControlLabel
 
 Se você tem várias opções aparecendo em uma lista, você pode economizar espaço usando caixas de seleção ao invés de interruptores liga/desliga. Se você tem uma única opção, evite usar uma caixa de seleção e use um interruptor de liga/desliga.
 
+{{"component": "modules/components/ComponentLinkHeader.js"}}
+
 ## Caixa de seleção básica
 
 {{"demo": "pages/components/checkboxes/Checkboxes.js"}}
 
-## Caixa de seleção com FormControlLabel
+## Caixas de seleção com FormGroup
 
-O componente `Checkbox` pode ser exibido com um rótulo graças ao componente `FormControlLabel`.
+You can provide a label to the `Checkbox` thanks to the `FormControlLabel` component.
 
 {{"demo": "pages/components/checkboxes/CheckboxLabels.js"}}
 
-## Caixas de seleção com FormGroup
+## Tamanho
 
-`FormGroup` é usado para agrupar componentes de seleção para facilitar o uso da API.
+Use the `size` prop or customize the font size of the svg icons to change the size of the checkboxes.
+
+{{"demo": "pages/components/checkboxes/SizeCheckboxes.js"}}
+
+## Cor
+
+{{"demo": "pages/components/checkboxes/ColorCheckboxes.js"}}
+
+## Ícone
+
+{{"demo": "pages/components/checkboxes/IconCheckboxes.js"}}
+
+## Controlado
+
+Você pode controlar a checkbox com as opções `checked` e `onChange`:
+
+{{"demo": "pages/components/checkboxes/ControlledCheckbox.js"}}
+
+## Caixa de seleção com FormControlLabel
+
+Uma caixa de seleção só pode ter dois estados em um formulário: marcado ou desmarcado. Ou submete o seu valor ou não. Visually, there are **three** states a checkbox can be in: checked, unchecked, or indeterminate.
+
+{{"demo": "pages/components/checkboxes/IndeterminateCheckbox.js"}}
+
+> ⚠️ When indeterminate is set, the value of the `checked` prop only impacts the form submitted values. It has no accessibility or UX implications.
+
+## Posicionamento do rótulo
+
+`FormGroup` is a helpful wrapper used to group selection control components.
 
 {{"demo": "pages/components/checkboxes/CheckboxesGroup.js"}}
 
@@ -35,11 +68,11 @@ Você pode alterar o posicionamento do rótulo:
 
 ## Caixa de seleção customizada
 
-Aqui está um exemplo de customização do componente. Você pode aprender mais sobre isso na [página de documentação de sobrescritas](/customization/components/).
+Aqui está um exemplo de customização do componente. Você pode aprender mais sobre isso na [página de documentação de sobrescritas](/customization/how-to-customize/).
 
-{{"demo": "pages/components/checkboxes/CustomizedCheckbox.js", "defaultCodeOpen": false}}
+{{"demo": "pages/components/checkboxes/CustomizedCheckbox.js"}}
 
-🎨 Se você está procurando inspiração, você pode verificar [os exemplos de customização de MUI Treasury](https://mui-treasury.com/styles/checkbox).
+🎨 If you are looking for inspiration, you can check [MUI Treasury's customization examples](https://mui-treasury.com/styles/checkbox/).
 
 ## Quando usar
 

@@ -2,10 +2,14 @@ const { JSDOM } = require('jsdom');
 
 // We can use jsdom-global at some point if maintaining these lists is a burden.
 const whitelist = [
+  // used by React's experimental cache API
+  // Always including it to reduce churn when switching between React builds
+  'AbortController',
   // required for fake getComputedStyle
   'CSSStyleDeclaration',
   'Element',
   'Event',
+  'TouchEvent',
   'Image',
   'HTMLElement',
   'HTMLInputElement',

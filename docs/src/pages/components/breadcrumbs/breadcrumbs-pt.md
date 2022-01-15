@@ -1,15 +1,19 @@
 ---
 title: Componente React para Navegação estrutural
 components: Breadcrumbs, Link, Typography
+githubLabel: 'component: Breadcrumbs'
+waiAria: 'https://www.w3.org/TR/wai-aria-practices/#breadcrumb'
 ---
 
 # Navegação estrutural
 
-<p class="description">Navegação estrutural permite aos usuários fazer seleções em um intervalo de caminhos.</p>
+<p class="description">Breadcrumbs consist of a list of links that help a user visualize a page's location within the hierarchical structure of a website, and allow navigation up to any of its "ancestors".</p>
+
+{{"component": "modules/components/ComponentLinkHeader.js"}}
 
 ## Navegação estrutural simples
 
-{{"demo": "pages/components/breadcrumbs/SimpleBreadcrumbs.js"}}
+{{"demo": "pages/components/breadcrumbs/BasicBreadcrumbs.js"}}
 
 ## Último caminho ativo
 
@@ -19,7 +23,7 @@ Mantendo o último caminho de navegação interativo.
 
 ## Separador customizado
 
-No exemplo a seguir, nós usamos duas strings separadoras, e um ícone SVG.
+Nos exemplos a seguir, nós estamos usando dois separadores de string e um ícone SVG.
 
 {{"demo": "pages/components/breadcrumbs/CustomSeparator.js"}}
 
@@ -33,7 +37,7 @@ No exemplo a seguir, nós usamos duas strings separadoras, e um ícone SVG.
 
 ## Navegação estrutural customizada
 
-Aqui está um exemplo de customização do componente. Você pode aprender mais sobre isso na [página de documentação de sobrescritas](/customization/components/).
+Aqui está um exemplo de customização do componente. Você pode aprender mais sobre isso na [página de documentação de sobrescritas](/customization/how-to-customize/).
 
 {{"demo": "pages/components/breadcrumbs/CustomizedBreadcrumbs.js"}}
 

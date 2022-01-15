@@ -1,14 +1,22 @@
 {
   "name": "ssr",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "private": true,
+  "browserslist": [
+    ">0.25%",
+    "not dead"
+  ],
   "dependencies": {
     "@babel/core": "latest",
     "@babel/node": "latest",
     "@babel/plugin-proposal-class-properties": "latest",
     "@babel/preset-env": "latest",
     "@babel/preset-react": "latest",
-    "@material-ui/core": "latest",
+    "@emotion/cache": "latest",
+    "@emotion/react": "latest",
+    "@emotion/styled": "latest",
+    "@emotion/server": "latest",
+    "@mui/material": "latest",
     "babel-loader": "latest",
     "cross-env": "latest",
     "express": "latest",

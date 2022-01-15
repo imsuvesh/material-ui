@@ -1,11 +1,14 @@
 ---
 title: Componente para Avatares
 components: Avatar, AvatarGroup, Badge
+githubLabel: 'component: Avatar'
 ---
 
 # Avatar
 
 <p class="description">Os avatares são encontrados ao longo do material design, com usos em tudo, desde tabelas até menus de diálogo.</p>
+
+{{"component": "modules/components/ComponentLinkHeader.js"}}
 
 ## Avatares com imagens
 
@@ -19,9 +22,13 @@ Avatares com letras podem ser criados passando sua string como `children`.
 
 {{"demo": "pages/components/avatars/LetterAvatars.js"}}
 
+You can use different background colors for the avatar. The following demo generates the color based on the name of the person.
+
+{{"demo": "pages/components/avatars/BackgroundLetterAvatars.js"}}
+
 ## Tamanhos
 
-Você pode alterar o tamanho do avatar com as propriedades CSS `height` e `width`.
+Você pode alterar o tamanho do avatar com as propriedades CSS  `height` e `width`.
 
 {{"demo": "pages/components/avatars/SizeAvatars.js"}}
 
@@ -49,9 +56,15 @@ Se houver um erro ao carregar a imagem do avatar, o componente escolhe uma alter
 
 ## Agrupamento
 
-`AvatarGroup` renderiza seus componentes children como uma pilha.
+`AvatarGroup` renders its children as a stack. Use the `max` prop to limit the number of avatars.
 
 {{"demo": "pages/components/avatars/GroupAvatars.js"}}
+
+### Total avatars
+
+If you need to control the total number of avatars not shown, you can use the `total` prop.
+
+{{"demo": "pages/components/avatars/TotalAvatars.js"}}
 
 ## Com emblema
 

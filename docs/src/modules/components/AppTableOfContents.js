@@ -1,106 +1,95 @@
 /* eslint-disable react/no-danger */
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import throttle from 'lodash/throttle';
-import clsx from 'clsx';
-import { useSelector } from 'react-redux';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import NoSsr from '@material-ui/core/NoSsr';
-import { BANNER_HEIGHT } from 'docs/src/modules/constants';
+import { styled } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
+import NoSsr from '@mui/material/NoSsr';
 import Link from 'docs/src/modules/components/Link';
 import PageContext from 'docs/src/modules/components/PageContext';
+import { useTranslate } from 'docs/src/modules/utils/i18n';
+import TableOfContentsBanner from 'docs/src/components/banner/TableOfContentsBanner';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    top: 70 + BANNER_HEIGHT,
-    // Fix IE 11 position sticky issue.
-    marginTop: 70 + BANNER_HEIGHT,
-    width: 175,
+const Nav = styled('nav')(({ theme }) => {
+  return {
+    top: 60,
+    // Fix IE11 position sticky issue.
+    marginTop: 60,
+    width: 240,
     flexShrink: 0,
     position: 'sticky',
-    height: `calc(100vh - 70px - ${BANNER_HEIGHT}px)`,
+    height: 'calc(100vh - 70px)',
     overflowY: 'auto',
+    padding: theme.spacing(2, 4, 2, 0),
     display: 'none',
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
-  },
-  links: {
-    padding: theme.spacing(2, 2, 2, 0),
-  },
-  contents: {
+  };
+});
+
+const NavLabel = styled(Typography)(({ theme }) => {
+  return {
     marginTop: theme.spacing(2),
-    paddingLeft: theme.spacing(1),
-  },
-  ul: {
-    padding: 0,
-    margin: 0,
-    listStyle: 'none',
-  },
-  item: {
-    fontSize: '.8125rem',
-    padding: theme.spacing(0.5, 0, 0.5, `${Math.max(0, theme.spacing(1) - 3)}px`),
-    borderLeft: `3px solid transparent`,
-    boxSizing: 'border-box',
+    marginBottom: theme.spacing(1),
+    paddingLeft: theme.spacing(1.4),
+    fontSize: theme.typography.pxToRem(11),
+    fontWeight: theme.typography.fontWeightBold,
+    textTransform: 'uppercase',
+    letterSpacing: '.08rem',
+    color: theme.palette.grey[600],
+  };
+});
+
+const NavList = styled(Typography)({
+  padding: 0,
+  margin: 0,
+  listStyle: 'none',
+});
+
+const NavItem = styled(Link, {
+  shouldForwardProp: (prop) => prop !== 'active' && prop !== 'secondary',
+})(({ active, secondary, theme }) => {
+  const activeStyles = {
+    borderLeftColor:
+      theme.palette.mode === 'light' ? theme.palette.primary[200] : theme.palette.primary[600],
+    color: theme.palette.mode === 'dark' ? theme.palette.primary[300] : theme.palette.primary[600],
     '&:hover': {
       borderLeftColor:
-        theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[900],
+        theme.palette.mode === 'light' ? theme.palette.primary[600] : theme.palette.primary[400],
+      color:
+        theme.palette.mode === 'light' ? theme.palette.primary[600] : theme.palette.primary[400],
     },
-    '&$active,&:active': {
+  };
+
+  return {
+    fontSize: theme.typography.pxToRem(13),
+    padding: theme.spacing(0, 1, 0, secondary ? 2.5 : '10px'),
+    margin: theme.spacing(0.5, 0, 1, 0),
+    borderLeft: `1px solid transparent`,
+    boxSizing: 'border-box',
+    fontWeight: 500,
+    '&:hover': {
       borderLeftColor:
-        theme.palette.type === 'light' ? theme.palette.grey[300] : theme.palette.grey[800],
+        theme.palette.mode === 'light' ? theme.palette.grey[400] : theme.palette.grey[600],
+      color: theme.palette.mode === 'light' ? theme.palette.grey[600] : theme.palette.grey[200],
     },
-  },
-  secondaryItem: {
-    paddingLeft: theme.spacing(2.5),
-  },
-  active: {},
-  hiring: {
-    color: theme.palette.text.secondary,
-    overflow: 'hidden',
-    margin: theme.spacing(5, 0, 2.5),
-    display: 'block',
-    '& img': {
-      display: 'block',
-    },
-  },
-  hiringLearn: {
-    display: 'block',
-    marginTop: theme.spacing(0.5),
-    color: theme.palette.text.primary,
-  },
-}));
-
-// TODO: these nodes are mutable sources. Use createMutableSource once it's stable
-function getItemsClient(headings) {
-  const itemsWithNode = [];
-
-  headings.forEach((item) => {
-    itemsWithNode.push({
-      ...item,
-      node: document.getElementById(item.hash),
-    });
-
-    if (item.children.length > 0) {
-      item.children.forEach((subitem) => {
-        itemsWithNode.push({
-          ...subitem,
-          node: document.getElementById(subitem.hash),
-        });
-      });
-    }
-  });
-  return itemsWithNode;
-}
+    ...(!active && {
+      color: theme.palette.mode === 'dark' ? theme.palette.grey[500] : theme.palette.text.primary,
+    }),
+    // TODO: We probably want `aria-current="location"` instead.
+    ...(active && activeStyles),
+    '&:active': activeStyles,
+  };
+});
 
 const noop = () => {};
 
 function useThrottledOnScroll(callback, delay) {
-  const throttledCallback = React.useMemo(() => (callback ? throttle(callback, delay) : noop), [
-    callback,
-    delay,
-  ]);
+  const throttledCallback = React.useMemo(
+    () => (callback ? throttle(callback, delay) : noop),
+    [callback, delay],
+  );
 
   React.useEffect(() => {
     if (throttledCallback === noop) {
@@ -115,16 +104,26 @@ function useThrottledOnScroll(callback, delay) {
   }, [throttledCallback]);
 }
 
-export default function AppTableOfContents(props) {
-  const { items } = props;
-  const classes = useStyles();
-  const t = useSelector((state) => state.options.t);
-  const theme = useTheme();
+function flatten(headings) {
+  const itemsWithNode = [];
 
-  const itemsWithNodeRef = React.useRef([]);
-  React.useEffect(() => {
-    itemsWithNodeRef.current = getItemsClient(items);
-  }, [items]);
+  headings.forEach((item) => {
+    itemsWithNode.push(item);
+
+    if (item.children.length > 0) {
+      item.children.forEach((subitem) => {
+        itemsWithNode.push(subitem);
+      });
+    }
+  });
+  return itemsWithNode;
+}
+
+export default function AppTableOfContents(props) {
+  const { toc } = props;
+  const t = useTranslate();
+
+  const items = React.useMemo(() => flatten(toc), [toc]);
 
   const { activePage } = React.useContext(PageContext);
   const [activeState, setActiveState] = React.useState(null);
@@ -137,24 +136,25 @@ export default function AppTableOfContents(props) {
     }
 
     let active;
-    for (let i = itemsWithNodeRef.current.length - 1; i >= 0; i -= 1) {
+    for (let i = items.length - 1; i >= 0; i -= 1) {
       // No hash if we're near the top of the page
       if (document.documentElement.scrollTop < 200) {
         active = { hash: null };
         break;
       }
 
-      const item = itemsWithNodeRef.current[i];
+      const item = items[i];
+      const node = document.getElementById(item.hash);
 
       if (process.env.NODE_ENV !== 'production') {
-        if (!item.node) {
+        if (!node) {
           console.error(`Missing node on the item ${JSON.stringify(item, null, 2)}`);
         }
       }
 
       if (
-        item.node &&
-        item.node.offsetTop <
+        node &&
+        node.offsetTop <
           document.documentElement.scrollTop + document.documentElement.clientHeight / 8
       ) {
         active = item;
@@ -165,7 +165,7 @@ export default function AppTableOfContents(props) {
     if (active && activeState !== active.hash) {
       setActiveState(active.hash);
     }
-  }, [activeState]);
+  }, [activeState, items]);
 
   // Corresponds to 10 frames at 60 Hz
   useThrottledOnScroll(items.length > 0 ? findActiveIndex : null, 166);
@@ -202,69 +202,46 @@ export default function AppTableOfContents(props) {
   );
 
   const itemLink = (item, secondary) => (
-    <Link
+    <NavItem
       display="block"
-      color={activeState === item.hash ? 'textPrimary' : 'textSecondary'}
-      href={`${activePage.pathname}#${item.hash}`}
+      href={`${activePage?.linkProps?.linkAs ?? activePage?.pathname}#${item.hash}`}
       underline="none"
       onClick={handleClick(item.hash)}
-      className={clsx(
-        classes.item,
-        { [classes.secondaryItem]: secondary },
-        activeState === item.hash ? classes.active : undefined,
-      )}
+      active={activeState === item.hash}
+      secondary={secondary}
     >
       <span dangerouslySetInnerHTML={{ __html: item.text }} />
-    </Link>
+    </NavItem>
   );
 
   return (
-    <nav className={classes.root} aria-label={t('pageTOC')}>
-      {items.length > 0 ? (
-        <div className={classes.links}>
-          <Typography gutterBottom className={classes.contents}>
-            {t('tableOfContents')}
-          </Typography>
-          <Typography component="ul" className={classes.ul}>
-            {items.map((item) => (
+    <Nav aria-label={t('pageTOC')}>
+      <NoSsr>
+        <TableOfContentsBanner />
+      </NoSsr>
+      {toc.length > 0 ? (
+        <React.Fragment>
+          <NavLabel gutterBottom>{t('tableOfContents')}</NavLabel>
+          <NavList component="ul">
+            {toc.map((item) => (
               <li key={item.text}>
                 {itemLink(item)}
                 {item.children.length > 0 ? (
-                  <ul className={classes.ul}>
+                  <NavList as="ul">
                     {item.children.map((subitem) => (
                       <li key={subitem.text}>{itemLink(subitem, true)}</li>
                     ))}
-                  </ul>
+                  </NavList>
                 ) : null}
               </li>
             ))}
-          </Typography>
-        </div>
+          </NavList>
+        </React.Fragment>
       ) : null}
-      <NoSsr>
-        <Link href="/company/careers/" underline="none" className={classes.hiring}>
-          <img
-            src={`/static/hiring-toc-${theme.palette.type}.png`}
-            alt=""
-            loading="lazy"
-            width={175}
-            height={119}
-          />
-          {"We're hiring a "}
-          {
-            ['React engineer', 'Full-stack engineer', 'Product manager', 'Dev. Advocate'][
-              Math.round(Math.random() * 3)
-            ]
-          }
-          {' and more roles.'}
-          {/* eslint-disable-next-line material-ui/no-hardcoded-labels */}
-          <span className={classes.hiringLearn}>Learn more &rarr;</span>
-        </Link>
-      </NoSsr>
-    </nav>
+    </Nav>
   );
 }
 
 AppTableOfContents.propTypes = {
-  items: PropTypes.array.isRequired,
+  toc: PropTypes.array.isRequired,
 };

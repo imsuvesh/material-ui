@@ -4,9 +4,9 @@
 
 ## FAQ
 
-### Woah - the API is way different! Does that mean 1.0 is completely different, I’ll have to learn the basics all over again, and migrating will be practically impossible?
+### Woah - the API is way different! Does that mean 1.0 is completely different, I'll have to learn the basics all over again, and migrating will be practically impossible?
 
-I’m glad you asked! The answer is no. The core concepts haven’t changed.
+I'm glad you asked! The answer is no. The core concepts haven't changed.
 You will notice that the API provides more flexibility, but this has a cost –
 lower-level components that abstract less complexity.
 
@@ -16,9 +16,10 @@ Material-UI was started [4 years ago](https://github.com/mui-org/material-ui/com
 The ecosystem has evolved a lot since then, we have also learned a lot.
 [@nathanmarks](https://github.com/nathanmarks/) started an ambitious task, rebuilding Material-UI from the **ground-up**
 taking advantage of this knowledge to address long-standing issues. To name some of the major changes:
-- New styling solution using CSS-in-JS (better [customization](/customization/components/) power, better performance)
+
+- New styling solution using CSS-in-JS (better [customization](/customization/how-to-customize/) power, better performance)
 - New theme handling (nesting, self-supporting, etc.)
-- Blazing fast documentation thanks to [Next.js](https://github.com/zeit/next.js)
+- Blazing fast documentation thanks to [Next.js](https://github.com/vercel/next.js)
 - Way better [test coverage](/guides/testing/) (99%+, run on all the major browsers, [visual regression tests](https://www.argos-ci.com/mui-org/material-ui))
 - Full [server-side rendering](/guides/server-rendering/) support
 - Wide range of [supported browsers](/getting-started/supported-platforms/)
@@ -27,53 +28,53 @@ taking advantage of this knowledge to address long-standing issues. To name some
 
 1. Start by installing the v1.x version of Material-UI along side the v0.x version.
 
-  With yarn:
-  ```sh
-  yarn add material-ui
-  yarn add @material-ui/core
-  ```
+With yarn:
 
-  Or with npm:
-  ```sh
-  npm install material-ui
-  npm install @material-ui/core
-  ```
+```sh
+yarn add material-ui
+yarn add @material-ui/core
+```
 
-  then
+Or with npm:
 
-  ```js
-  import FlatButton from 'material-ui/FlatButton'; // v0.x
-  import Button from '@material-ui/core/Button'; // v1.x
-  ```
+```sh
+npm install material-ui
+npm install @material-ui/core
+```
 
-2. Run [the migration helper](https://github.com/mui-org/material-ui/tree/master/packages/material-ui-codemod) on your project.
+then
+
+```js
+import FlatButton from 'material-ui/FlatButton'; // v0.x
+import Button from '@material-ui/core/Button'; // v1.x
+```
+
+2. Run [the migration helper](https://github.com/mui-org/material-ui/tree/master/packages/mui-codemod) on your project.
 3. `MuiThemeProvider` is optional for v1.x., but if you have a custom theme, you are free to use v0.x and v1.x versions of the component at the same time, like this:
 
-  ```jsx
-  import React from 'react';
-  import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'; // v1.x
-  import { MuiThemeProvider as V0MuiThemeProvider} from 'material-ui';
-  import getMuiTheme from 'material-ui/styles/getMuiTheme';
+```jsx
+import * as React from 'react';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'; // v1.x
+import { MuiThemeProvider as V0MuiThemeProvider } from 'material-ui';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
-  const theme = createMuiTheme({
-    /* theme for v1.x */
-  });
-  const themeV0 = getMuiTheme({
-    /* theme for v0.x */
-  });
+const theme = createMuiTheme({
+  /* theme for v1.x */
+});
+const themeV0 = getMuiTheme({
+  /* theme for v0.x */
+});
 
-  function App() {
-    return (
-      <MuiThemeProvider theme={theme}>
-        <V0MuiThemeProvider muiTheme={themeV0}>
-          {/*Components*/}
-        </V0MuiThemeProvider>
-      </MuiThemeProvider>
-    );
-  }
+function App() {
+  return (
+    <MuiThemeProvider theme={theme}>
+      <V0MuiThemeProvider muiTheme={themeV0}>{/*Components*/}</V0MuiThemeProvider>
+    </MuiThemeProvider>
+  );
+}
 
-  export default App;
-  ```
+export default App;
+```
 
 4. After that, you are free to migrate one component instance at the time.
 
@@ -88,13 +89,13 @@ In the future, we will look into providing a simple component to solve the simpl
 
 ### Svg Icon
 
-Run [the migration helper](https://github.com/mui-org/material-ui/tree/master/packages/material-ui-codemod) on your project.
+Run [the migration helper](https://github.com/mui-org/material-ui/tree/master/packages/mui-codemod) on your project.
 
 This will apply a change such as the following:
 
 ```diff
 -import AddIcon from 'material-ui/svg-icons/Add';
-+import AddIcon from '@material-ui/icons/Add';
++import AddIcon from '@mui/icons-material/Add';
 
 <AddIcon />
 ```

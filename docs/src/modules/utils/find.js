@@ -1,15 +1,19 @@
 const fs = require('fs');
 const path = require('path');
+const FEATURE_TOGGLE = require('../../featureToggle');
 
 const markdownRegex = /\.md$/;
 
-// Returns the markdowns of the documentation in a flat array.
-// {
-//   pathname: String,
-//   filename: String,
-// }
+/**
+ * Returns the markdowns of the documentation in a flat array.
+ * @param {string} [directory]
+ * @param {Array<{ filename: string, pathname: string }>} [pagesMarkdown]
+ * @returns {Array<{ filename: string, pathname: string }>}
+ */
 function findPagesMarkdown(
-  directory = path.resolve(__dirname, '../../../src/pages'),
+  directory = FEATURE_TOGGLE.enable_product_scope
+    ? path.resolve(__dirname, '../../../data')
+    : path.resolve(__dirname, '../../../src/pages'),
   pagesMarkdown = [],
 ) {
   const items = fs.readdirSync(directory);
@@ -26,10 +30,18 @@ function findPagesMarkdown(
       return;
     }
 
-    let pathname = itemPath
-      .replace(new RegExp(`\\${path.sep}`, 'g'), '/')
-      .replace(/^.*\/pages/, '')
-      .replace('.md', '');
+    let pathname = '';
+    if (FEATURE_TOGGLE.enable_product_scope) {
+      pathname = itemPath
+        .replace(new RegExp(`\\${path.sep}`, 'g'), '/')
+        .replace(/^.*\/material[^-]/, '/')
+        .replace('.md', '');
+    } else {
+      pathname = itemPath
+        .replace(new RegExp(`\\${path.sep}`, 'g'), '/')
+        .replace(/^.*\/pages/, '')
+        .replace('.md', '');
+    }
 
     // Remove the last pathname segment.
     pathname = pathname.split('/').slice(0, 3).join('/');
@@ -45,9 +57,56 @@ function findPagesMarkdown(
   return pagesMarkdown;
 }
 
-const componentRegex = /^(Unstable_)?([A-Z][a-z]+)+\.js/;
+/**
+ * Returns the markdowns of the documentation in a flat array.
+ * @param {string} [directory]
+ * @param {Array<{ filename: string, pathname: string }>} [pagesMarkdown]
+ * @returns {Array<{ filename: string, pathname: string }>}
+ */
+function findPagesMarkdownNew(
+  directory = path.resolve(__dirname, '../../../data'),
+  pagesMarkdown = [],
+) {
+  const items = fs.readdirSync(directory);
 
-// Returns the component source in a flat array.
+  items.forEach((item) => {
+    const itemPath = path.resolve(directory, item);
+
+    if (fs.statSync(itemPath).isDirectory()) {
+      findPagesMarkdownNew(itemPath, pagesMarkdown);
+      return;
+    }
+
+    if (!markdownRegex.test(item)) {
+      return;
+    }
+
+    let pathname = itemPath
+      .replace(new RegExp(`\\${path.sep}`, 'g'), '/')
+      .replace(/^.*\/data/, '')
+      .replace('.md', '');
+
+    // Remove the last pathname segment.
+    pathname = pathname.split('/').slice(0, 4).join('/');
+
+    pagesMarkdown.push({
+      // Relative location in the path (URL) system.
+      pathname: pathname.replace('components/', 'react-'),
+      // Relative location in the file system.
+      filename: itemPath,
+    });
+  });
+
+  return pagesMarkdown;
+}
+
+const componentRegex = /^(Unstable_)?([A-Z][a-z]+)+\.(js|tsx)/;
+
+/**
+ * Returns the component source in a flat array.
+ * @param {string} directory
+ * @param {Array<{ filename: string }>} components
+ */
 function findComponents(directory, components = []) {
   const items = fs.readdirSync(directory);
 
@@ -71,12 +130,24 @@ function findComponents(directory, components = []) {
   return components;
 }
 
-const jsRegex = /\.js$/;
+const pageRegex = /(\.js|\.tsx)$/;
 const blackList = ['/.eslintrc', '/_document', '/_app'];
 
-// Returns the Next.js pages available in a nested format.
-// The output is in the next.js format.
-// Each pathname is a route you can navigate to.
+/**
+ * @typedef {object} NextJSPage
+ * @property {string} pathname
+ * @property {NextJSPage[]} [children]
+ */
+
+/**
+ * Returns the Next.js pages available in a nested format.
+ * The output is in the next.js format.
+ * Each pathname is a route you can navigate to.
+ * @param {{ front: true }} [options]
+ * @param {string} [directory]
+ * @param {NextJSPage[]} pages
+ * @returns {NextJSPage[]}
+ */
 function findPages(
   options = {},
   directory = path.resolve(__dirname, '../../../pages'),
@@ -88,6 +159,7 @@ function findPages(
       .replace(new RegExp(`\\${path.sep}`, 'g'), '/')
       .replace(/^.*\/pages/, '')
       .replace('.js', '')
+      .replace('.tsx', '')
       .replace(/^\/index$/, '/') // Replace `index` by `/`.
       .replace(/\/index$/, '');
 
@@ -113,7 +185,7 @@ function findPages(
       return;
     }
 
-    if (!jsRegex.test(item) || blackList.includes(pathname)) {
+    if (!pageRegex.test(item) || blackList.includes(pathname)) {
       return;
     }
 
@@ -126,8 +198,12 @@ function findPages(
   pages.sort((a, b) => {
     const pathnameA = a.pathname.replace(/-/g, '');
     const pathnameB = b.pathname.replace(/-/g, '');
-    if (pathnameA < pathnameB) return -1;
-    if (pathnameA > pathnameB) return 1;
+    if (pathnameA < pathnameB) {
+      return -1;
+    }
+    if (pathnameA > pathnameB) {
+      return 1;
+    }
     return 0;
   });
 
@@ -137,5 +213,6 @@ function findPages(
 module.exports = {
   findPages,
   findPagesMarkdown,
+  findPagesMarkdownNew,
   findComponents,
 };

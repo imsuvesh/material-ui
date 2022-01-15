@@ -1,33 +1,69 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { styled, createTheme } from '@mui/material/styles';
+import { withStyles } from '@mui/styles';
 import Head from 'docs/src/modules/components/Head';
 import AppFrame from 'docs/src/modules/components/AppFrame';
 import AppContainer from 'docs/src/modules/components/AppContainer';
-import { BANNER_HEIGHT } from 'docs/src/modules/constants';
 import { useRouter } from 'next/router';
-import Link from '@material-ui/core/Link';
-import Avatar from '@material-ui/core/Avatar';
-import AppFooter from 'docs/src/modules/components/AppFooter';
-import { exactProp } from '@material-ui/utils';
-import MarkdownElement from './MarkdownElement';
+import Divider from '@mui/material/Divider';
+import Link from '@mui/material/Link';
+import Typography from '@mui/material/Typography';
+import Avatar from '@mui/material/Avatar';
+import AppFooter from 'docs/src/layouts/AppFooter';
+import { exactProp } from '@mui/utils';
+import MarkdownElement from 'docs/src/modules/components/MarkdownElement';
 
 const authors = {
   oliviertassinari: {
     name: 'Olivier Tassinari',
-    github: 'oliviertassinari',
+    avatar: 'https://avatars.githubusercontent.com/u/3165635',
   },
   mbrookes: {
     name: 'Matt Brookes',
-    github: 'mbrookes',
+    avatar: 'https://avatars.githubusercontent.com/u/357702',
+  },
+  eps1lon: {
+    name: 'Sebastian Silbermann',
+    avatar: 'https://avatars.githubusercontent.com/u/12292047',
+  },
+  mnajdova: {
+    name: 'Marija Najdova',
+    avatar: 'https://avatars.githubusercontent.com/u/4512430',
+  },
+  michaldudak: {
+    name: 'Michał Dudak',
+    avatar: 'https://avatars.githubusercontent.com/u/4696105',
+  },
+  siriwatknp: {
+    name: 'Siriwat Kunaporn',
+    avatar: 'https://avatars.githubusercontent.com/u/18292247',
+  },
+  'danilo-leal': {
+    name: 'Danilo Leal',
+    avatar: 'https://avatars.githubusercontent.com/u/67129314',
+  },
+  m4theushw: {
+    name: 'Matheus Wichman',
+    avatar: 'https://avatars.githubusercontent.com/u/42154031',
+  },
+  flaviendelangle: {
+    name: 'Flavien Delangle',
+    avatar: 'https://avatars.githubusercontent.com/u/3309670',
+  },
+  DanailH: {
+    name: 'Danail Hadjiatanasov',
+    avatar: 'https://avatars.githubusercontent.com/u/5858539',
+  },
+  alexfauquette: {
+    name: 'Alexandre Fauquette',
+    avatar: 'https://avatars.githubusercontent.com/u/45398769',
   },
 };
 
 const styles = (theme) => ({
   root: {
     flexGrow: 1,
-    // Adding top buffer because of the v5 banner
-    marginTop: BANNER_HEIGHT,
   },
   back: {
     display: 'block',
@@ -35,7 +71,7 @@ const styles = (theme) => ({
   },
   container: {
     marginBottom: theme.spacing(20),
-    maxWidth: 680 + theme.spacing(8 + 4),
+    maxWidth: `calc(680px + ${theme.spacing(12)})`,
     '& h1': {
       marginBottom: theme.spacing(4),
     },
@@ -67,21 +103,23 @@ const styles = (theme) => ({
     color: theme.palette.text.secondary,
     ...theme.typography.body2,
   },
-  avatar: {
+});
+
+const AuthorsContainer = styled('div')(({ theme }) => ({
+  display: 'flex',
+  flexWrap: 'wrap',
+  marginBottom: theme.spacing(1),
+  '& .author': {
     display: 'flex',
-    gap: theme.spacing(3),
-    '& > div': {
-      marginTop: theme.spacing(-1),
-      display: 'flex',
-      alignItems: 'center',
-      marginBottom: theme.spacing(5),
-      fontWeight: theme.typography.fontWeightMedium,
-      '& .MuiAvatar-root': {
-        marginRight: theme.spacing(1),
-      },
+    alignItems: 'center',
+    paddingBottom: theme.spacing(3),
+    paddingRight: theme.spacing(2),
+    fontWeight: theme.typography.fontWeightMedium,
+    '& .MuiAvatar-root': {
+      marginRight: theme.spacing(1),
     },
   },
-});
+}));
 
 function TopLayoutBlog(props) {
   const { classes, docs } = props;
@@ -92,24 +130,23 @@ function TopLayoutBlog(props) {
   return (
     <AppFrame disableDrawer>
       <Head
-        title={`${finalTitle} - Material-UI`}
+        title={`${finalTitle} - MUI`}
         description={description}
         largeCard={headers.card === 'true' ? true : undefined}
         card={
-          headers.card === 'true'
-            ? `https://material-ui.com/static${router.pathname}/card.png`
-            : undefined
+          headers.card === 'true' ? `https://mui.com/static${router.pathname}/card.png` : undefined
         }
       />
       <div className={classes.root}>
-        <AppContainer className={classes.container}>
+        <AppContainer component="main" className={classes.container}>
           <Link
             href="https://medium.com/material-ui"
             rel="nofollow"
-            color="textSecondary"
+            color="text.secondary"
             variant="body2"
             className={classes.back}
           >
+            {/* eslint-disable-next-line material-ui/no-hardcoded-labels */}
             {'< Back to blog'}
           </Link>
           {headers.title ? (
@@ -125,20 +162,26 @@ function TopLayoutBlog(props) {
               <MarkdownElement>
                 <h1>{headers.title}</h1>
               </MarkdownElement>
-              <div className={classes.avatar}>
+              <AuthorsContainer>
                 {headers.authors.map((author) => (
-                  <div key={author}>
-                    <Avatar src={`https://github.com/${authors[author].github}.png`} />
-                    {authors[author].name}
+                  <div key={author} className="author">
+                    <Avatar
+                      sx={{ width: 32, height: 32 }}
+                      alt=""
+                      src={`${authors[author].avatar}?s=${32}`}
+                      srcSet={`${authors[author].avatar}?s=${32 * 2} 2x`}
+                    />
+                    <Typography variant="body2">{authors[author].name}</Typography>
                   </div>
                 ))}
-              </div>
+              </AuthorsContainer>
             </React.Fragment>
           ) : null}
           {rendered.map((chunk, index) => {
             return <MarkdownElement key={index} renderedMarkdown={chunk} />;
           })}
         </AppContainer>
+        <Divider />
         <AppFooter />
       </div>
     </AppFrame>
@@ -154,4 +197,5 @@ if (process.env.NODE_ENV !== 'production') {
   TopLayoutBlog.propTypes = exactProp(TopLayoutBlog.propTypes);
 }
 
-export default withStyles(styles)(TopLayoutBlog);
+const defaultTheme = createTheme();
+export default withStyles(styles, { defaultTheme })(TopLayoutBlog);

@@ -1,6 +1,7 @@
 ---
 title: Detect click outside React component
 components: ClickAwayListener
+githubLabel: 'component: ClickAwayListener'
 ---
 
 # Click away listener
@@ -9,6 +10,8 @@ components: ClickAwayListener
 
 - 📦 [1.5 kB gzipped](/size-snapshot).
 - ⚛️ Support portals
+
+{{"component": "modules/components/ComponentLinkHeader.js", "design": false}}
 
 ## Example
 
@@ -33,3 +36,13 @@ However, you can configure it to respond to the leading events (mouse down + tou
 {{"demo": "pages/components/click-away-listener/LeadingClickAway.js"}}
 
 > ⚠️ In this mode, only interactions on the scrollbar of the document is ignored.
+
+## Unstyled
+
+- 📦 [784 B gzipped](https://bundlephobia.com/package/@mui/base@latest)
+
+As the component does not have any styles, it also comes with the Base package.
+
+```js
+import ClickAwayListener from '@mui/base/ClickAwayListener';
+```
